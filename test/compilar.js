@@ -97,4 +97,26 @@ exports['testing repeat'] = function (test) {
 	test.done();	
 };
 
+exports['testing seq with midi support'] = function (test) {
+
+	var mus = { 
+		tag: 'seq',
+		left: { tag: 'note', pitch: 'a3', dur: 250 },
+		right: { 
+			tag: 'seq',
+			left: { tag: 'note', pitch: 'b3', dur: 250 },
+			right: { tag: 'note', pitch: 'c4', dur: 500 } 
+		}
+ 	};
+
+ 	var notes = [
+		{ tag: 'note', pitch: 48, start: 0, dur: 250 },
+		{ tag: 'note', pitch: 59, start: 250, dur: 250 },
+		{ tag: 'note', pitch: 60, start: 500, dur: 500 }
+	]; 
+
+	test.deepEqual(notes, compilar(mus, {midi: true}));
+	test.done();	
+};
+
 

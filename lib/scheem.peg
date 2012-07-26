@@ -12,17 +12,11 @@ atom =
 	ws c:validchar+ ws
 		{return c.join("");}
 
-wexpression =
-	ws e:expression ws
-		{return e}
-
 expression =
 	atom/
 	"'" a:atom 
 		{return ["quote", [a]]}/
 	"'" e:expression
 		{return ["quote", e]}/
-	"(" e:wexpression* ")"
-		{
-			return e;
-		}
+	ws "(" e:expression* ")" ws
+		{ return e;	}

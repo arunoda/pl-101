@@ -1,7 +1,10 @@
 {
-    "name": "mus-lang"
-  , "version": "0.0.1"
-  , "devDependencies": {
+    "name": "mus-lang",
+    "version": "0.0.1",
+    "dependencies": {
+    	"pegjs": "*"
+    },
+    "devDependencies": {
         "nodeunit": "*"
     }
 }

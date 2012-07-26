@@ -1,4 +1,4 @@
-var compilar = require('../lib/compilar');
+var compilar = require('../lib/mus-compilar');
 
 exports['testing seq'] = function (test) {
 

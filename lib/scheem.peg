@@ -9,7 +9,7 @@ ws =
 		{return ""}
 
 atom = 
-	c:validchar+ ws
+	ws c:validchar+ ws
 		{return c.join("");}
 
 wexpression =

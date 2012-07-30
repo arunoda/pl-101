@@ -4,11 +4,16 @@ start =
 validchar =
 	[0-9a-zA-Z_?!+\-=@#$%^&*/.]
 
+number = 
+	p1:[1-9]+ p2:[0-9]*
+		{return parseInt(p1.join("") + p2.join(""));}
+
 ws =
 	[" "\t\n\r]*
 		{return ""}
 
-atom = 
+atom =  
+	n:number/
 	ws c:validchar+ ws
 		{return c.join("");}
 

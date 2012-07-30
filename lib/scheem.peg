@@ -2,18 +2,19 @@ start =
 	expression
 
 validchar =
-	[0-9a-zA-Z_?!+\-=@#$%^&*/.]
+	[0-9a-zA-Z_?!+\-=@#$%^&*/.><]
 
 number = 
-	p1:[1-9]+ p2:[0-9]*
-		{return parseInt(p1.join("") + p2.join(""));}
+	p1:[1-9] p2:[0-9]*
+		{return parseInt(p1 + p2.join(""));}
 
 ws =
 	[" "\t\n\r]*
 		{return ""}
 
 atom =  
-	n:number/
+        ws n:number ws
+		{return n;}/
 	ws c:validchar+ ws
 		{return c.join("");}
 

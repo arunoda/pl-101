@@ -4,10 +4,17 @@ var path = require('path');
 
 var compilar = require('../lib/mus-compilar');
 
-exports['simple number'] = function (test) {
+exports['simple number1'] = function (test) {
 
 	var pegParse = getPegParser();
 	test.deepEqual(pegParse("10"), 10);
+	test.done();	
+};
+
+exports['simple number2'] = function (test) {
+
+	var pegParse = getPegParser();
+	test.deepEqual(pegParse("20"), 20);
 	test.done();	
 };
 

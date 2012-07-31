@@ -1,0 +1,95 @@
+<html>
+<head>
+	<title>Scheem Online Intepreter</title>
+
+	<script type="text/javascript" src='jquery.min.js'></script>
+
+	<script type="text/javascript" src='parser.js'></script>
+	<script type="text/javascript" src='intepreter.js'></script>
+
+	<script src="ace/theme-crimson_editor.js" type="text/javascript" charset="utf-8"></script>
+	<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="ace/mode-clojure.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		$(function() {
+
+			var editor = ace.edit("editor");
+			editor.setTheme("ace/theme/crimson_editor");
+			var ClojureMode = require("ace/mode/clojure").Mode;
+			editor.getSession().setMode(new ClojureMode());
+
+			if(localStorage) {
+				var sourceCode = localStorage.getItem("code");
+				editor.getSession().setValue(sourceCode);
+			}
+
+			var noOfLines = editor.session.getLength();
+			editor.moveCursorTo(noOfLines)
+
+			editor.getSession().on('change', function() {
+
+				var sourceCode = editor.getSession().getValue();
+				try {
+					var result = evalScheemString(sourceCode);
+					$('#result').text("> " + result);
+				} catch(ex) {
+					$("#result").text("Error: " + ex.message);
+				}
+
+				//Save code on the local storage
+				if(localStorage) {
+					localStorage.setItem("code", sourceCode);
+				}
+			});
+
+		});
+	</script>
+	<style type="text/css">
+
+		body{
+			text-align: center;
+			margin: 0px;
+		}
+
+		#content {
+			width: 930px;
+			margin: auto;
+			text-align: left;
+		}
+
+		h1 {
+			margin: 30px 0px 10px 0px;
+			text-align: center;
+			font-family: "Arial";
+			font-size: 35px;
+			/*font-style: italic;*/
+			color: #555;
+		}
+
+		#editor {
+			border: 1px solid #eee;
+			width: 930px;
+			height: 500px;
+			font-size: 14px;
+		}
+
+		#result {
+			padding: 5px;
+			border: 1px solid #D5F7F1;
+			background-color: #EBFAF7;
+			font-family: monospace;
+			font-size: 16px;
+			margin: 0px 0px 10px 0px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div id='content'>
+		<h1>Scheem Online Intepreter</h1>
+		<div id='result'>&gt; 0</div>
+		<div id="editor"></div>
+	</div>
+</body>
+</html>

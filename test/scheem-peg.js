@@ -54,7 +54,7 @@ exports['expression with whitespaces and newline + tabs '] = function (test) {
 exports['expression with (\'atom) '] = function (test) {
 
 	var pegParse = getPegParser();
-	test.deepEqual(pegParse("(one 'two)"), ["one", ["quote", ["two"]]]);
+	test.deepEqual(pegParse("(one 'two)"), ["one", ["quote", "two"]]);
 	test.done();	
 };
 
@@ -68,7 +68,7 @@ exports['expression with (\'expression) '] = function (test) {
 exports['expression with both (\'atom) and (\'expression) '] = function (test) {
 
 	var pegParse = getPegParser();
-	test.deepEqual(pegParse("(one '(10 20) \'30)"), ["one", ["quote", ["10", "20"]], ["quote", ["30"]]]);
+	test.deepEqual(pegParse("(one '(10 20) \'30)"), ["one", ["quote", ["10", "20"]], ["quote", "30"]]);
 	test.done();	
 };
 

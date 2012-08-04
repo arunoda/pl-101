@@ -8,7 +8,7 @@ var folder = path.resolve(__dirname, "../examples");
 var fileList = fs.readdirSync(folder);
 fileList.forEach(function(file) {
 	var source = fs.readFileSync(path.resolve(folder, file), "utf8");
-	createTest(file, source);
+	createTest(file.replace('.scheem', ''), source);
 });
 
 function createTest(title, source) {

@@ -1,0 +1,5 @@
+(begin
+	;;indicating test suite for the expected return
+	(define expect 400)
+	((lambda (x y) (+ x y)) 100 300)
+)

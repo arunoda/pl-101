@@ -1,4 +1,0 @@
-(begin
-	(define expect 'hello)
-	('hello)
-)

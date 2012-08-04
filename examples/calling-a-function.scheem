@@ -1,0 +1,8 @@
+(begin
+	;;indicating test suite for the expected return
+	(define expect 300)
+	(define addnow (
+		lambda (x y) (+ x y)))
+	(define z 100)
+	(addnow z 200)
+)

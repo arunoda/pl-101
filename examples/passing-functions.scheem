@@ -1,0 +1,9 @@
+(begin
+	;;indicating test suite for the expected return
+	(define expect 300)
+	(define add (
+		lambda (x y) (+ x y)))
+	(define domath(
+		lambda (func x y) (func x y) ))
+	(domath add 100 200)
+)

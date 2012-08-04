@@ -2,25 +2,22 @@ var scheem = require("../lib/scheem.js");
 var fs = require('fs');
 var path  = require('path');
 
-createTest("Hello Babu", "(+ 30 10)", 40);
+//Iterate over examples folder and run them as tests
+var folder = path.resolve(__dirname, "../examples");
 
-// exports['simple execution'] = function(test) {
-
-// 	var source = "(+ 30 10)";
-// 	test.equals(scheem(source), 40);
-// 	test.done();
-// };
-
-fs.readdir('examples', function(err, fileList) {
-
-	
+var fileList = fs.readdirSync(folder);
+fileList.forEach(function(file) {
+	var source = fs.readFileSync(path.resolve(folder, file), "utf8");
+	createTest(file, source);
 });
 
-function createTest(title, source, expecation) {
+function createTest(title, source) {
 
 	exports[title] = function(test) {
 
-		test.equals(scheem(source), expecation);
+		var env = { bindings: {} };
+		var rtn = scheem(source, env);
+		test.deepEqual(rtn, env.bindings.expect);
 		test.done();
 	}
 }

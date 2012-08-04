@@ -29,7 +29,7 @@ list =
 
 quote =
 	"'" a:atom
-		{return ["quote", [a]]}/
+		{return ["quote", a]}/
 	"'" e:expression
 		{return ["quote", e]}
 

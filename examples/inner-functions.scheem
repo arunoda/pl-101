@@ -1,0 +1,12 @@
+(begin
+	(define expect 20)
+	(define count (
+		lambda (x) (
+			lambda (y) (
+				;;accumulate y to the x of inner
+				;;just return it after set! (it's happening automaticaly)
+				set! x (+ x y)))))
+	(define cnt (count 0))
+	(cnt 10)
+	(cnt 10)
+)

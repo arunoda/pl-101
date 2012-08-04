@@ -1,0 +1,9 @@
+(begin
+	;;indicating test suite for the expected return
+	(define expect 2100)
+	(define y 2000)
+	(define count (
+		lambda (x) (set! y (+ x y))))
+	(count 100)
+	(y)
+)

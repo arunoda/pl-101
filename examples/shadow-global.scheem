@@ -1,0 +1,9 @@
+(begin
+	;;indicating test suite for the expected return
+	(define expect #t)
+	(define y 2000)
+	(define plus100 (
+		lambda (y) (+ y 100)))
+	(define rtn (plus100 20))
+	(= (= rtn 120) (= y 2000))
+)

@@ -6,11 +6,12 @@ validchar =
 	[0-9a-zA-Z_?!+\-=@#$%^&*/.><]
 
 number = 
+	"0" {return 0;}/
 	p1:[1-9] p2:[0-9]*
 		{return parseInt(p1 + p2.join(""));}
 
 comment = 
-	";;" [0-9a-zA-Z_?!+\-=@#$%^&*/.><" "]* "\n"? {return ""}
+	ws ";;" ['()0-9a-zA-Z_?!+\-=@#$%^&*/.><" "]* ws {return ""}
 
 
 ws =
@@ -34,5 +35,5 @@ quote =
 		{return ["quote", e]}
 
 expression =
-	ws comment? e:(atom / quote / list) ws comment? ws
+	ws comment* e:(atom / quote / list) comment* ws
 		{ return e;}

@@ -1,0 +1,8 @@
+(begin
+	;;indicating test suite for the expected return
+	(define expect 6)
+	(define factorial (
+		lambda (x) (if (= x 0) 1 (
+			* x (factorial (- x 1))))))
+	(factorial 3)
+)

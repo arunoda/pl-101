@@ -72,6 +72,34 @@ exports['expression with both (\'atom) and (\'expression) '] = function (test) {
 	test.done();	
 };
 
+exports['comment:before'] = function (test) {
+
+	var pegParse = getPegParser();
+	test.deepEqual(pegParse("(;;this is the comment\n+ 10 20)"), ["+", 10, 20]);
+	test.done();	
+};
+
+exports['comment:after'] = function (test) {
+
+	var pegParse = getPegParser();
+	test.deepEqual(pegParse("(+ 10;;this is the comment 20)"), ["+", 10]);
+	test.done();	
+};
+
+exports['comment:after atom + ws'] = function (test) {
+
+	var pegParse = getPegParser();
+	test.deepEqual(pegParse("(+ 10 ;;this is the comment)"), ["+", 10]);
+	test.done();	
+};
+
+exports['comment:inside an empty list'] = function (test) {
+
+	var pegParse = getPegParser();
+	test.deepEqual(pegParse("(;;sds)"), []);
+	test.done();	
+};
+
 var parse = null;
 function getPegParser() {
 

@@ -1,3 +1,4 @@
+
 start =
 	expression
 
@@ -8,21 +9,30 @@ number =
 	p1:[1-9] p2:[0-9]*
 		{return parseInt(p1 + p2.join(""));}
 
+comment = 
+	";;" [0-9a-zA-Z_?!+\-=@#$%^&*/.><" "]* "\n"? {return ""}
+
+
 ws =
 	[" "\t\n\r]*
 		{return ""}
 
 atom =  
-        ws n:number ws
+    n:number
 		{return n;}/
-	ws c:validchar+ ws
+	c:validchar+
 		{return c.join("");}
 
-expression =
-	atom/
-	"'" a:atom 
+list =
+	"(" comment? e:expression* ")"
+		{ return e;	}
+
+quote =
+	"'" a:atom
 		{return ["quote", [a]]}/
 	"'" e:expression
-		{return ["quote", e]}/
-	ws "(" e:expression* ")" ws
-		{ return e;	}
+		{return ["quote", e]}
+
+expression =
+	ws comment? e:(atom / quote / list) ws comment? ws
+		{ return e;}

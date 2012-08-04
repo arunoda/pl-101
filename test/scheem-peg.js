@@ -2,8 +2,6 @@ var peg = require('pegjs');
 var fs = require('fs');
 var path = require('path');
 
-var compilar = require('../lib/mus-compilar');
-
 exports['simple number1'] = function (test) {
 
 	var pegParse = getPegParser();
